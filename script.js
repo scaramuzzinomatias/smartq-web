@@ -33,6 +33,51 @@ mainNav?.querySelectorAll("a").forEach((link) => {
   });
 });
 
+const revealTargets = document.querySelectorAll(
+  [
+    ".section-heading",
+    ".intro-grid article",
+    ".module-card",
+    ".product-card",
+    ".platform-card",
+    ".step",
+    ".advantage-lead",
+    ".advantage-group",
+    ".proof-copy",
+    ".proof-metrics div",
+    ".contact > div",
+    ".contact-form",
+  ].join(",")
+);
+
+if ("IntersectionObserver" in window) {
+  revealTargets.forEach((element, index) => {
+    element.classList.add("reveal");
+    element.style.setProperty("--reveal-delay", `${Math.min(index % 4, 3) * 70}ms`);
+  });
+
+  const revealObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    },
+    {
+      rootMargin: "0px 0px -12% 0px",
+      threshold: 0.12,
+    }
+  );
+
+  revealTargets.forEach((element) => revealObserver.observe(element));
+} else {
+  revealTargets.forEach((element) => element.classList.add("is-visible"));
+}
+
 form?.addEventListener("submit", async (event) => {
   event.preventDefault();
   const button = form.querySelector("button");

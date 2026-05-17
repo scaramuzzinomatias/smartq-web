@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="SmartQ suma QR dinamico, control y telemetria a expendedoras de agua caliente, vending y equipos con validador de monedas."
+      content="SmartQ suma QR dinamico, control fisico y telemetria a expendedoras de agua caliente, vending MDB y equipos con validador de monedas."
     />
-    <title>SmartQ | Vending mas inteligente</title>
+    <title>SmartQ | QR dinamico para expendedoras</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=smartq-motion-20260517" />
   </head>
   <body>
     <header class="site-header">
@@ -22,29 +22,18 @@
         <img src="assets/smartq-mark.png" alt="" />
         <span>
           <strong>SmartQ</strong>
-          <small>Vending mas inteligente</small>
+          <small>QR dinamico + control</small>
         </span>
       </a>
       <nav class="nav" id="main-nav" aria-label="Navegacion principal">
-        <a href="#producto">Producto</a>
+        <a href="#producto">TermoControl</a>
         <a href="#dispositivos">Dispositivos</a>
-        <a href="#plataformas">Plataformas</a>
+        <a href="#flujo">Diferencial</a>
+        <a href="#ventajas">Ventajas</a>
         <a href="#contacto">Contacto</a>
       </nav>
       <div class="header-end">
         <a class="header-action" href="#contacto">Contacto</a>
-        <a
-          class="whatsapp-fab"
-          href="https://wa.me/542236690217"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Contactar por WhatsApp"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="32" height="32" aria-hidden="true">
-            <circle cx="24" cy="24" r="24" fill="#25D366"/>
-            <path fill="#ffffff" d="M36.2 11.7A17.1 17.1 0 0 0 24.1 6.5C15.3 6.5 8.1 13.6 8.1 22.5c0 2.8.7 5.5 2.1 7.9L8 40l9.8-2.6c2.3 1.3 4.9 1.9 7.5 1.9 8.8 0 16-7.1 16-16 0-4.3-1.7-8.3-4.6-11.5l-.5-.1zM24.1 38.7c-2.4 0-4.7-.6-6.7-1.8l-.5-.3-5 1.3 1.3-4.9-.3-.5a13.5 13.5 0 0 1-2.1-7.3c0-7.5 6.1-13.6 13.6-13.6 3.6 0 7 1.4 9.6 4a13.5 13.5 0 0 1 4 9.6c-.1 7.5-6.2 13.5-13.9 13.5zm7.5-10.1c-.4-.2-2.4-1.2-2.8-1.3-.4-.1-.6-.2-.9.2-.3.4-1 1.3-1.3 1.6-.2.3-.5.3-.9.1-2.4-1.2-3.9-2.1-5.5-4.8-.4-.7.4-.7 1.2-2.2.1-.3.1-.5-.1-.7-.2-.2-.9-2.2-1.2-3-.3-.8-.6-.7-.9-.7h-.8c-.3 0-.7.1-1.1.5-.4.4-1.4 1.4-1.4 3.4s1.5 3.9 1.7 4.2c.2.3 2.9 4.4 7 6.2 2.6 1.1 3.6 1.2 4.9 1 .8-.1 2.4-1 2.7-1.9.3-.9.3-1.7.2-1.9-.1-.1-.4-.2-.8-.4z"/>
-          </svg>
-        </a>
         <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="main-nav">
           <span></span>
           <span></span>
@@ -53,99 +42,130 @@
       </div>
     </header>
 
+    <aside class="follow-rail" aria-label="Seguinos">
+      <span>Seguinos</span>
+      <a href="https://wa.me/542236690217" target="_blank" rel="noopener noreferrer" aria-label="Seguinos por WhatsApp">WA</a>
+    </aside>
+
+    <a
+      class="whatsapp-floating"
+      href="https://wa.me/542236690217"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Contactar por WhatsApp"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="32" height="32" aria-hidden="true">
+        <circle cx="24" cy="24" r="24" fill="#25D366"/>
+        <path fill="#ffffff" d="M36.2 11.7A17.1 17.1 0 0 0 24.1 6.5C15.3 6.5 8.1 13.6 8.1 22.5c0 2.8.7 5.5 2.1 7.9L8 40l9.8-2.6c2.3 1.3 4.9 1.9 7.5 1.9 8.8 0 16-7.1 16-16 0-4.3-1.7-8.3-4.6-11.5l-.5-.1zM24.1 38.7c-2.4 0-4.7-.6-6.7-1.8l-.5-.3-5 1.3 1.3-4.9-.3-.5a13.5 13.5 0 0 1-2.1-7.3c0-7.5 6.1-13.6 13.6-13.6 3.6 0 7 1.4 9.6 4a13.5 13.5 0 0 1 4 9.6c-.1 7.5-6.2 13.5-13.9 13.5zm7.5-10.1c-.4-.2-2.4-1.2-2.8-1.3-.4-.1-.6-.2-.9.2-.3.4-1 1.3-1.3 1.6-.2.3-.5.3-.9.1-2.4-1.2-3.9-2.1-5.5-4.8-.4-.7.4-.7 1.2-2.2.1-.3.1-.5-.1-.7-.2-.2-.9-2.2-1.2-3-.3-.8-.6-.7-.9-.7h-.8c-.3 0-.7.1-1.1.5-.4.4-1.4 1.4-1.4 3.4s1.5 3.9 1.7 4.2c.2.3 2.9 4.4 7 6.2 2.6 1.1 3.6 1.2 4.9 1 .8-.1 2.4-1 2.7-1.9.3-.9.3-1.7.2-1.9-.1-.1-.4-.2-.8-.4z"/>
+      </svg>
+    </a>
+
     <main>
       <section class="hero" id="inicio" aria-labelledby="hero-title">
-        <img class="hero-media" src="assets/smartq-pay-hero.png" alt="" />
+        <div class="hero-media" aria-hidden="true">
+          <img src="assets/smartq-pay-hero.png" alt="" />
+        </div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
-          <p class="eyebrow">QR dinamico para expendedoras</p>
-          <h1 id="hero-title">El pago QR que convierte expendedoras en servicios conectados.</h1>
+          <p class="eyebrow">QR dinamico + control fisico</p>
+          <h1 id="hero-title">Suma QR dinamico a tus expendedoras sin reemplazar el equipo.</h1>
           <p class="hero-copy">
-            SmartQ incorpora QR dinamico, control operativo y telemetria a expendedoras de
-            agua caliente, vending MDB y equipos que ya trabajan con validador de monedas,
-            sin reemplazar la maquina existente.
+            SmartQ no se queda en cobrar: valida el pago, habilita la maquina, registra eventos
+            y lleva telemetria a expendedoras de agua caliente, vending MDB y equipos que ya
+            trabajan con validador de monedas.
           </p>
           <div class="hero-actions">
-            <a class="button primary" href="#producto">Ver producto principal</a>
-            <a class="button secondary" href="#contacto">Hablar de mi caso</a>
+            <a class="button primary" href="#producto">Ver TermoControl</a>
+            <a class="button secondary" href="#contacto">Evaluar mi maquina</a>
           </div>
           <div class="hero-stats" aria-label="Diferenciales destacados">
-            <span><strong>Agua</strong> caliente autoservicio</span>
-            <span><strong>MDB</strong> vending y cafe</span>
-            <span><strong>Monedas</strong> retrofit QR</span>
+            <span><strong>TermoControl</strong> agua caliente</span>
+            <span><strong>Pay MDB</strong> vending existente</span>
+            <span><strong>Pulse</strong> monedero, relay o tiempo</span>
           </div>
         </div>
       </section>
 
       <section class="section intro product-intro" id="producto">
         <div class="section-heading">
-          <p class="eyebrow">Producto diferencial</p>
-          <h2>QR dinamico para expendedoras de agua caliente y servicios autoservicio.</h2>
+          <p class="eyebrow">Producto principal</p>
+          <h2>SmartQ TermoControl: QR dinamico y control total para expendedoras de agua caliente.</h2>
         </div>
         <div class="intro-grid">
           <article>
             <span class="icon">01</span>
-            <h3>Pago por uso</h3>
-            <p>El usuario escanea un QR dinamico y SmartQ habilita el servicio correspondiente.</p>
+            <h3>Habilita por pago</h3>
+            <p>El usuario escanea un QR dinamico y SmartQ habilita una sesion de agua caliente por precio, tiempo o regla operativa.</p>
           </article>
           <article>
             <span class="icon">02</span>
-            <h3>Control de la maquina</h3>
-            <p>TermoControl gobierna la expendedora de agua caliente y reporta su operacion.</p>
+            <h3>Controla la maquina</h3>
+            <p>TermoControl gobierna la entrega fisica, los tiempos, los estados y las condiciones de funcionamiento del equipo.</p>
           </article>
           <article>
             <span class="icon">03</span>
-            <h3>Gestion remota</h3>
-            <p>SmartQ Control centraliza equipos, contadores, pagos, estados y telemetria.</p>
+            <h3>Registra y sincroniza</h3>
+            <p>SmartQ Control centraliza ventas, contadores, eventos, alertas y telemetria para operar sin depender del efectivo.</p>
           </article>
+        </div>
+        <div class="qr-flow" aria-label="Flujo SmartQ">
+          <span>Escanea</span>
+          <span>Paga</span>
+          <span>Valida</span>
+          <span>Habilita</span>
+          <span>Registra</span>
         </div>
       </section>
 
       <section class="section devices" id="dispositivos">
         <div class="section-heading">
           <p class="eyebrow">Hardware SmartQ</p>
-          <h2>Dispositivos para cada tipo de expendedora.</h2>
+          <h2>Tres caminos para modernizar maquinas existentes.</h2>
         </div>
         <div class="module-grid">
-          <article class="module-card">
-            <h3>SmartQ Coffee Link</h3>
-            <p>NFC + MDB para CoffeeControl. Identifica usuarios y habilita consumos controlados.</p>
+          <article class="module-card featured">
+            <p class="card-kicker">Agua caliente</p>
+            <h3>SmartQ TermoControl</h3>
+            <p>
+              Hardware para controlar el funcionamiento completo de expendedoras de agua caliente
+              y habilitar el servicio con QR dinamico.
+            </p>
           </article>
           <article class="module-card">
+            <p class="card-kicker">Vending MDB</p>
             <h3>SmartQ Pay MDB</h3>
             <p>QR dinamico para incorporar en maquinas expendedoras con protocolo MDB.</p>
           </article>
           <article class="module-card">
+            <p class="card-kicker">Pulso, relay o tiempo</p>
             <h3>SmartQ Pulse</h3>
             <p>
               QR dinamico para cualquier equipo que ya funciona con validador de monedas.
             </p>
           </article>
           <article class="module-card">
-            <h3>SmartQ TermoControl</h3>
-            <p>
-              Hardware en desarrollo para el control total y funcionamiento de expendedoras de
-              agua caliente.
-            </p>
+            <p class="card-kicker">Cafe corporativo</p>
+            <h3>SmartQ Coffee Link</h3>
+            <p>NFC + MDB para CoffeeControl. Identifica usuarios y habilita consumos controlados.</p>
           </article>
         </div>
       </section>
 
       <section class="section hardware-focus" id="agua-caliente">
         <div class="hardware-copy">
-          <p class="eyebrow">Foco agua caliente</p>
-          <h2>SmartQ TermoControl es el corazon del diferencial.</h2>
+          <p class="eyebrow">Agua caliente</p>
+          <h2>No es solo un QR pegado: SmartQ controla lo que pasa despues del pago.</h2>
           <p>
-            El producto principal de SmartQ se concentra en expendedoras de agua caliente:
-            controla el funcionamiento del equipo, habilita el servicio despues del pago QR,
-            registra contadores y mantiene la operacion conectada a SmartQ Control.
+            El diferencial esta en unir pago, logica de uso y hardware. En agua caliente,
+            TermoControl puede habilitar la entrega, medir eventos, aplicar reglas y mantener
+            la operacion conectada a SmartQ Control.
           </p>
           <div class="focus-tags">
             <span>QR dinamico</span>
-            <span>Protocolo MDB</span>
+            <span>Control fisico</span>
             <span>Validador de monedas</span>
             <span>Control agua caliente</span>
-            <span>Offline-first</span>
+            <span>Telemetria</span>
           </div>
         </div>
         <div class="product-showcase" aria-label="Hardware SmartQ">
@@ -176,7 +196,7 @@
       <section class="section product-band" id="plataformas">
         <div class="section-heading narrow">
           <p class="eyebrow">Ecosistema SmartQ</p>
-          <h2>El producto se apoya en plataformas para operar y crecer.</h2>
+          <h2>El hardware se apoya en plataformas para operar y crecer.</h2>
         </div>
         <div class="platform-grid">
           <article class="platform-card">
@@ -200,52 +220,107 @@
 
       <section class="section flow" id="flujo">
         <div class="section-heading">
-          <p class="eyebrow">Como funciona</p>
-          <h2>Del equipo existente al servicio inteligente.</h2>
+          <p class="eyebrow">Diferencial SmartQ</p>
+          <h2>Mas que cobrar: controlar, medir y operar la maquina.</h2>
         </div>
         <div class="flow-steps">
           <div class="step">
             <span>1</span>
-            <h3>Instalar</h3>
-            <p>Se integra el dispositivo SmartQ al MDB, pulso, validador o circuito del servicio.</p>
+            <h3>QR contextual</h3>
+            <p>Cada operacion puede responder a maquina, precio, estado, regla, usuario o sesion.</p>
           </div>
           <div class="step">
             <span>2</span>
-            <h3>Configurar</h3>
-            <p>El equipo se vincula a la plataforma con precios, reglas, usuarios y conectividad.</p>
+            <h3>Control fisico</h3>
+            <p>El hardware SmartQ habilita la entrega real: agua caliente, credito MDB, pulso, relay o tiempo.</p>
           </div>
           <div class="step">
             <span>3</span>
-            <h3>Operar</h3>
-            <p>El usuario paga con QR o valida por NFC y SmartQ ejecuta la entrega fisica.</p>
+            <h3>Telemetria</h3>
+            <p>La plataforma registra ventas, contadores, estados, eventos tecnicos y actividad por equipo.</p>
           </div>
           <div class="step">
             <span>4</span>
-            <h3>Medir</h3>
-            <p>El backoffice muestra ventas, consumo, estado tecnico y eventos aun si hubo offline.</p>
+            <h3>Retrofit real</h3>
+            <p>Se adapta a expendedoras existentes sin reemplazar la maquina ni perder su logica de uso.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section advantages" id="ventajas">
+        <div class="advantage-lead">
+          <p class="eyebrow">Ventajas estrategicas</p>
+          <h2>Una forma mas simple de cobrar, ajustar precios y operar maquinas reales.</h2>
+          <p>
+            SmartQ prepara tus equipos para un escenario cada vez mas digital: menos dependencia
+            de efectivo, menos visitas operativas y mas control desde un panel centralizado.
+          </p>
+          <div class="machine-panel" aria-label="Panel operativo SmartQ">
+            <div>
+              <span>Modo</span>
+              <strong>Tiempo / Pulso / ON-OFF</strong>
+            </div>
+            <div>
+              <span>Precio</span>
+              <strong>Remoto</strong>
+            </div>
+            <div>
+              <span>QR</span>
+              <strong>Dinamico</strong>
+            </div>
+            <div>
+              <span>Estado</span>
+              <strong>Habilitado</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="advantage-board">
+          <div class="advantage-group">
+            <h3>Para el negocio</h3>
+            <ul>
+              <li>Incorpora pagos digitales sin cambiar la maquina existente.</li>
+              <li>Reduce friccion: el cliente escanea, paga y el servicio se activa.</li>
+              <li>Ayuda a mejorar el ticket promedio y a cobrar el precio configurado para cada servicio.</li>
+              <li>Permite ajustar precios a distancia desde SmartQ Control.</li>
+              <li>Centraliza ventas, estados, contadores y actividad por equipo.</li>
+              <li>Disminuye perdidas por billetes rechazados, falta de cambio o trabas mecanicas.</li>
+              <li>Deja la operacion preparada para facturacion e integraciones futuras.</li>
+            </ul>
+          </div>
+          <div class="advantage-group accent">
+            <h3>Frente al efectivo y al QR estatico</h3>
+            <ul>
+              <li>QR dinamico por operacion: evita etiquetas superpuestas o codigos falsos.</li>
+              <li>Activacion instantanea: no depende de llegar a un monto exacto.</li>
+              <li>Modos configurables para tiempo, pulsos, multipulsos, toggle y ON/OFF.</li>
+              <li>Precio configurable sin modificar firmware por cambios de billetes o monedas.</li>
+              <li>Compatible con medios digitales y billeteras soportadas por la pasarela de pago.</li>
+              <li>Recaudacion digital directa y menos traslado de dinero fisico.</li>
+            </ul>
           </div>
         </div>
       </section>
 
       <section class="section proof">
         <div class="proof-copy">
-          <p class="eyebrow">Casos de uso</p>
-          <h2>Agua caliente, vending, cafe, calibradores de aire y expendedoras que necesiten QR dinamico.</h2>
+          <p class="eyebrow">Producto instalado</p>
+          <h2>Pagos digitales para cobrar, hardware para activar, plataforma para controlar.</h2>
         </div>
         <div class="proof-metrics">
-          <div><strong>QR</strong><span>pago dinamico por servicio</span></div>
-          <div><strong>Agua</strong><span>control completo de expendedoras</span></div>
-          <div><strong>MDB</strong><span>vending y cafe existentes</span></div>
+          <div><strong>Agua</strong><span>expendedoras con control completo</span></div>
+          <div><strong>QR</strong><span>pago dinamico por sesion o regla</span></div>
+          <div><strong>Control</strong><span>hardware, telemetria y backoffice</span></div>
         </div>
       </section>
 
       <section class="section contact" id="contacto">
         <div>
-          <p class="eyebrow">Demo SmartQ</p>
+          <p class="eyebrow">Consulta SmartQ</p>
           <h2>Contanos que maquina queres convertir.</h2>
           <p>
-            Podemos evaluar si tu caso entra por MDB, QR dinamico, NFC, validador de monedas,
-            pulso, relay o control temporizado, y armar una demo sobre el flujo real.
+            Evaluamos si tu caso entra por MDB, QR dinamico, NFC, validador de monedas,
+            pulso, relay, control temporizado o control completo para expendedoras de agua caliente.
           </p>
         </div>
         <form
