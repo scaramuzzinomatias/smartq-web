@@ -291,6 +291,16 @@ h3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.product-intro {
+  background:
+    radial-gradient(circle at 82% 0%, rgba(0, 158, 233, 0.18), transparent 34%),
+    linear-gradient(180deg, #ffffff 0%, #f4f7f9 100%);
+}
+
+.product-intro .section-heading {
+  width: min(920px, 100%);
+}
+
 .intro-grid article,
 .platform-card,
 .module-card,
