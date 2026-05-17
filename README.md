@@ -46,6 +46,16 @@ La web quedara publicada en una URL similar a:
 https://TU_USUARIO.github.io/smartq-web/
 ```
 
-## Alternativa con Render
+## Publicar con Render
 
-El proyecto tambien incluye `server.js` y `render.yaml` para desplegarlo como web service Node en Render. Ese camino solo es necesario si mas adelante se quiere usar backend propio en vez de Google Apps Script.
+El proyecto incluye `render.yaml` para publicarlo como **Static Site** en Render.
+
+1. Entrar a Render.
+2. Crear un nuevo **Blueprint** o **Static Site** desde el repo de GitHub.
+3. Seleccionar este repositorio.
+4. Render detecta `render.yaml`.
+5. Publicar.
+
+No hace falta configurar variables de entorno para el formulario actual, porque el envio de email usa Google Apps Script desde `script.js`.
+
+`server.js` queda como alternativa futura si se decide usar backend propio en vez de Google Apps Script.

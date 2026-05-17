@@ -1,26 +1,7 @@
 services:
   - type: web
     name: smartq-web
-    env: node
-    plan: free
-    buildCommand: npm install
-    startCommand: npm start
-    envVars:
-      - key: NODE_VERSION
-        value: 20
-      - key: CONTACT_TO
-        value: scaramuzzinomatias@gmail.com
-      - key: CONTACT_FROM
-        sync: false
-      - key: MAIL_DRY_RUN
-        value: false
-      - key: SMTP_HOST
-        sync: false
-      - key: SMTP_PORT
-        sync: false
-      - key: SMTP_SECURE
-        sync: false
-      - key: SMTP_USER
-        sync: false
-      - key: SMTP_PASS
-        sync: false
+    runtime: static
+    buildCommand: echo "Static site: no build required"
+    staticPublishPath: .
+    autoDeploy: true
