@@ -1,7 +1,0 @@
-services:
-  - type: web
-    name: smartq-web
-    runtime: static
-    buildCommand: echo "Static site: no build required"
-    staticPublishPath: .
-    autoDeploy: true
