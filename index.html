@@ -1,360 +1,585 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="SmartQ suma QR dinamico, control fisico y telemetria a expendedoras de agua caliente, vending MDB y equipos con validador de monedas."
-    />
-    <title>SmartQ | QR dinamico para expendedoras</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css?v=smartq-motion-20260517" />
-  </head>
-  <body>
-    <header class="site-header">
-      <a class="brand" href="#inicio" aria-label="SmartQ inicio">
-        <img src="assets/smartq-mark.png" alt="" />
-        <span>
-          <strong>SmartQ</strong>
-          <small>QR dinamico + control</small>
-        </span>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartQ — Tecnología inteligente para tu negocio</title>
+  <meta name="description" content="Plataformas SaaS y hardware inteligente para control de flota, pagos QR y máquinas expendedoras.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#" class="nav-logo">
+        <img src="assets/isotipo.png" alt="SmartQ" class="nav-logo-img">
+        <svg class="nav-logo-wordmark" viewBox="0 0 604 207" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <filter id="rmWhite" color-interpolation-filters="sRGB">
+              <feColorMatrix type="matrix" values="
+                1 0 0 0 0
+                0 1 0 0 0
+                0 0 1 0 0
+                -0.333 -0.333 -0.333 0 1
+              " />
+            </filter>
+          </defs>
+          <image href="assets/logo-wordmark.jpg" width="604" height="207" filter="url(#rmWhite)" />
+        </svg>
       </a>
-      <nav class="nav" id="main-nav" aria-label="Navegacion principal">
-        <a href="#producto">TermoControl</a>
-        <a href="#dispositivos">Dispositivos</a>
-        <a href="#flujo">Diferencial</a>
-        <a href="#ventajas">Ventajas</a>
-        <a href="#contacto">Contacto</a>
-      </nav>
-      <div class="header-end">
-        <a class="header-action" href="#contacto">Contacto</a>
-        <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="main-nav">
-          <span></span>
-          <span></span>
-          <span></span>
+      <button class="nav-toggle" id="navToggle" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#plataformas" class="nav-link">Plataformas</a></li>
+        <li><a href="#dispositivos" class="nav-link">Dispositivos</a></li>
+        <li><a href="#simulador" class="nav-link">Simulador</a></li>
+        <li><a href="#beneficios" class="nav-link">Beneficios</a></li>
+        <li><a href="#contacto" class="nav-link">Contacto</a></li>
+        <li>
+          <a href="https://smartq.com.ar/acceso" class="btn-nav-acceso">
+            <span class="material-symbols-rounded">login</span>Acceso
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero bg-grid" id="hero">
+    <div class="glow-spot glow-primary hero-glow"></div>
+    <div class="container hero-container">
+      <div class="hero-content reveal-on-scroll">
+        <span class="hero-badge"><span></span>IoT para Vending & Café Corporativo</span>
+        <h1>Convertí tus máquinas expendedoras y cafeteras en <span>negocios inteligentes</span></h1>
+        <p>SmartQ es la plataforma SaaS + hardware IoT que le suma cobro con QR, control remoto y estadísticas en vivo a tus máquinas expendedoras y cafeteras, sin cambiar el equipo que ya tenés.</p>
+        <div class="hero-actions">
+          <a href="#plataformas" class="btn btn-primary">Ver plataformas</a>
+          <a href="#contacto" class="btn btn-outline">Solicitar demo</a>
+        </div>
+      </div>
+      <div class="hero-visual reveal-on-scroll delay-200">
+        <!-- Unified High Fidelity Telemetry Dashboard Panel -->
+        <div class="telemetry-dashboard">
+          <div class="telemetry-header">
+            <div class="telemetry-title">
+              <span class="telemetry-pulse"></span>
+              SmartQ Telemetría — En vivo
+            </div>
+            <div class="telemetry-status">STATUS: OK</div>
+          </div>
+          <div class="telemetry-body">
+            <!-- Left side: live telemetry node logs -->
+            <div class="telemetry-left">
+              <div class="telemetry-panel-card">
+                <div class="panel-card-title">Eventos IoT</div>
+                <div class="live-events-list" id="liveEventsList">
+                  <div class="live-event-row">
+                    <span class="event-time">10:42:01 — MP Vending</span>
+                    <span class="event-text">Pago aprobado $1.500</span>
+                  </div>
+                  <div class="live-event-row">
+                    <span class="event-time">10:41:48 — Coffee Link</span>
+                    <span class="event-text">NFC Leído - Ración despachada</span>
+                  </div>
+                  <div class="live-event-row">
+                    <span class="event-time">10:41:02 — TermoControl</span>
+                    <span class="event-text">Temperatura: 85°C (Estable)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Right side: line chart display -->
+            <div class="telemetry-right">
+              <div class="telemetry-chart-card">
+                <div class="panel-card-title">Ventas Hoy (Seguimiento)</div>
+                <div class="chart-svg-container">
+                  <svg width="100%" height="130" viewBox="0 0 280 130" fill="none" style="overflow: visible;">
+                    <!-- Grid background lines -->
+                    <line x1="20" y1="20" x2="260" y2="20" stroke="#F1F5F9" stroke-width="1" />
+                    <line x1="20" y1="60" x2="260" y2="60" stroke="#F1F5F9" stroke-width="1" />
+                    <line x1="20" y1="100" x2="260" y2="100" stroke="#F1F5F9" stroke-width="1" />
+                    
+                    <!-- Vertical grid lines -->
+                    <path class="chart-grid-vertical" d="M 60 10 L 60 110 M 110 10 L 110 110 M 160 10 L 160 110 M 210 10 L 210 110" />
+                    
+                    <!-- Line Chart Path with drawing animation -->
+                    <path class="chart-svg-line" d="M 20 100 Q 50 80 80 40 T 140 70 T 200 30 T 260 20" stroke="url(#chartGradient)" stroke-width="3" stroke-linecap="round" />
+                    
+                    <!-- Area under chart line -->
+                    <path d="M 20 100 Q 50 80 80 40 T 140 70 T 200 30 T 260 20 L 260 110 L 20 110 Z" fill="url(#chartAreaGradient)" opacity="0.12" />
+
+                    <!-- Points on line -->
+                    <circle cx="80" cy="40" r="4" fill="#009EE9" stroke="#FFFFFF" stroke-width="1.5" />
+                    <circle cx="200" cy="30" r="4" fill="#009EE9" stroke="#FFFFFF" stroke-width="1.5" />
+
+                    <!-- Chart gradients -->
+                    <defs>
+                      <linearGradient id="chartGradient" x1="0" y1="0" x2="280" y2="0" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="#217EB4" />
+                        <stop offset="100%" stop-color="#009EE9" />
+                      </linearGradient>
+                      <linearGradient id="chartAreaGradient" x1="0" y1="0" x2="0" y2="130" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="#009EE9" />
+                        <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLATAFORMAS SAAS -->
+  <section class="section" id="plataformas">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-tag">Plataformas SaaS</span>
+        <h2>Paneles de Gestión Integrada</h2>
+        <p>Controlá tu flota de máquinas y consumos desde una interfaz moderna, rápida y accesible desde cualquier dispositivo.</p>
+      </div>
+
+      <!-- Tab selectors -->
+      <p class="tabs-hint reveal-on-scroll"><span class="material-symbols-rounded">touch_app</span> Tocá para cambiar de panel</p>
+      <div class="tabs-selector reveal-on-scroll">
+        <button class="tab-btn active" data-tab="tab-control">
+          <span class="material-symbols-rounded">settings_overscan</span> SmartQ Control
+        </button>
+        <button class="tab-btn" data-tab="tab-coffee">
+          <span class="material-symbols-rounded">coffee</span> SmartQ CoffeeControl
         </button>
       </div>
-    </header>
 
-    <aside class="follow-rail" aria-label="Seguinos">
-      <span>Seguinos</span>
-      <a href="https://wa.me/542236690217" target="_blank" rel="noopener noreferrer" aria-label="Seguinos por WhatsApp">WA</a>
-    </aside>
-
-    <a
-      class="whatsapp-floating"
-      href="https://wa.me/542236690217"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Contactar por WhatsApp"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="32" height="32" aria-hidden="true">
-        <circle cx="24" cy="24" r="24" fill="#25D366"/>
-        <path fill="#ffffff" d="M36.2 11.7A17.1 17.1 0 0 0 24.1 6.5C15.3 6.5 8.1 13.6 8.1 22.5c0 2.8.7 5.5 2.1 7.9L8 40l9.8-2.6c2.3 1.3 4.9 1.9 7.5 1.9 8.8 0 16-7.1 16-16 0-4.3-1.7-8.3-4.6-11.5l-.5-.1zM24.1 38.7c-2.4 0-4.7-.6-6.7-1.8l-.5-.3-5 1.3 1.3-4.9-.3-.5a13.5 13.5 0 0 1-2.1-7.3c0-7.5 6.1-13.6 13.6-13.6 3.6 0 7 1.4 9.6 4a13.5 13.5 0 0 1 4 9.6c-.1 7.5-6.2 13.5-13.9 13.5zm7.5-10.1c-.4-.2-2.4-1.2-2.8-1.3-.4-.1-.6-.2-.9.2-.3.4-1 1.3-1.3 1.6-.2.3-.5.3-.9.1-2.4-1.2-3.9-2.1-5.5-4.8-.4-.7.4-.7 1.2-2.2.1-.3.1-.5-.1-.7-.2-.2-.9-2.2-1.2-3-.3-.8-.6-.7-.9-.7h-.8c-.3 0-.7.1-1.1.5-.4.4-1.4 1.4-1.4 3.4s1.5 3.9 1.7 4.2c.2.3 2.9 4.4 7 6.2 2.6 1.1 3.6 1.2 4.9 1 .8-.1 2.4-1 2.7-1.9.3-.9.3-1.7.2-1.9-.1-.1-.4-.2-.8-.4z"/>
-      </svg>
-    </a>
-
-    <main>
-      <section class="hero" id="inicio" aria-labelledby="hero-title">
-        <div class="hero-media" aria-hidden="true">
-          <img src="assets/smartq-pay-hero.png" alt="" />
-        </div>
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-          <p class="eyebrow">QR dinamico + control fisico</p>
-          <h1 id="hero-title">Suma QR dinamico a tus expendedoras sin reemplazar el equipo.</h1>
-          <p class="hero-copy">
-            SmartQ no se queda en cobrar: valida el pago, habilita la maquina, registra eventos
-            y lleva telemetria a expendedoras de agua caliente, vending MDB y equipos que ya
-            trabajan con validador de monedas.
-          </p>
-          <div class="hero-actions">
-            <a class="button primary" href="#producto">Ver TermoControl</a>
-            <a class="button secondary" href="#contacto">Evaluar mi maquina</a>
-          </div>
-          <div class="hero-stats" aria-label="Diferenciales destacados">
-            <span><strong>TermoControl</strong> agua caliente</span>
-            <span><strong>Pay MDB</strong> vending existente</span>
-            <span><strong>Pulse</strong> monedero, relay o tiempo</span>
-          </div>
-        </div>
-      </section>
-
-      <section class="section intro product-intro" id="producto">
-        <div class="section-heading">
-          <p class="eyebrow">Producto principal</p>
-          <h2>SmartQ TermoControl: QR dinamico y control total para expendedoras de agua caliente.</h2>
-        </div>
-        <div class="intro-grid">
-          <article>
-            <span class="icon">01</span>
-            <h3>Habilita por pago</h3>
-            <p>El usuario escanea un QR dinamico y SmartQ habilita una sesion de agua caliente por precio, tiempo o regla operativa.</p>
-          </article>
-          <article>
-            <span class="icon">02</span>
-            <h3>Controla la maquina</h3>
-            <p>TermoControl gobierna la entrega fisica, los tiempos, los estados y las condiciones de funcionamiento del equipo.</p>
-          </article>
-          <article>
-            <span class="icon">03</span>
-            <h3>Registra y sincroniza</h3>
-            <p>SmartQ Control centraliza ventas, contadores, eventos, alertas y telemetria para operar sin depender del efectivo.</p>
-          </article>
-        </div>
-        <div class="qr-flow" aria-label="Flujo SmartQ">
-          <span>Escanea</span>
-          <span>Paga</span>
-          <span>Valida</span>
-          <span>Habilita</span>
-          <span>Registra</span>
-        </div>
-      </section>
-
-      <section class="section devices" id="dispositivos">
-        <div class="section-heading">
-          <p class="eyebrow">Hardware SmartQ</p>
-          <h2>Tres caminos para modernizar maquinas existentes.</h2>
-        </div>
-        <div class="module-grid">
-          <article class="module-card featured">
-            <p class="card-kicker">Agua caliente</p>
-            <h3>SmartQ TermoControl</h3>
-            <p>
-              Hardware para controlar el funcionamiento completo de expendedoras de agua caliente
-              y habilitar el servicio con QR dinamico.
-            </p>
-          </article>
-          <article class="module-card">
-            <p class="card-kicker">Vending MDB</p>
-            <h3>SmartQ Pay MDB</h3>
-            <p>QR dinamico para incorporar en maquinas expendedoras con protocolo MDB.</p>
-          </article>
-          <article class="module-card">
-            <p class="card-kicker">Pulso, relay o tiempo</p>
-            <h3>SmartQ Pulse</h3>
-            <p>
-              QR dinamico para cualquier equipo que ya funciona con validador de monedas.
-            </p>
-          </article>
-          <article class="module-card">
-            <p class="card-kicker">Cafe corporativo</p>
-            <h3>SmartQ Coffee Link</h3>
-            <p>NFC + MDB para CoffeeControl. Identifica usuarios y habilita consumos controlados.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section hardware-focus" id="agua-caliente">
-        <div class="hardware-copy">
-          <p class="eyebrow">Agua caliente</p>
-          <h2>No es solo un QR pegado: SmartQ controla lo que pasa despues del pago.</h2>
-          <p>
-            El diferencial esta en unir pago, logica de uso y hardware. En agua caliente,
-            TermoControl puede habilitar la entrega, medir eventos, aplicar reglas y mantener
-            la operacion conectada a SmartQ Control.
-          </p>
-          <div class="focus-tags">
-            <span>QR dinamico</span>
-            <span>Control fisico</span>
-            <span>Validador de monedas</span>
-            <span>Control agua caliente</span>
-            <span>Telemetria</span>
-          </div>
-        </div>
-        <div class="product-showcase" aria-label="Hardware SmartQ">
-          <article class="product-card">
-            <img src="assets/smartq-pay-mdb-module.png" alt="Modulo SmartQ Pay MDB con QR dinamico" />
-            <div>
-              <strong>SmartQ Pay MDB</strong>
-              <span>QR dinamico para maquinas expendedoras con protocolo MDB.</span>
-            </div>
-          </article>
-          <article class="product-card">
-            <img src="assets/smartq-termocontrol.png" alt="SmartQ TermoControl para expendedora de agua caliente" />
-            <div>
-              <strong>SmartQ TermoControl</strong>
-              <span>Hardware para controlar el funcionamiento completo de la expendedora.</span>
-            </div>
-          </article>
-          <article class="product-card">
-            <img src="assets/smartq-pulse-air.png" alt="SmartQ Pulse para calibrador de aire" />
-            <div>
-              <strong>SmartQ Pulse</strong>
-              <span>QR dinamico para equipos que trabajan con validador de monedas.</span>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="section product-band" id="plataformas">
-        <div class="section-heading narrow">
-          <p class="eyebrow">Ecosistema SmartQ</p>
-          <h2>El hardware se apoya en plataformas para operar y crecer.</h2>
-        </div>
-        <div class="platform-grid">
-          <article class="platform-card">
-            <p class="card-kicker">Pagos y flota</p>
+      <div class="tabs-wrapper reveal-on-scroll">
+        <!-- Tab 1: SmartQ Control -->
+        <div class="tab-content active" id="tab-control">
+          <div class="platform-info">
+            <span class="platform-badge badge-primary">Vending & Expendedoras</span>
             <h3>SmartQ Control</h3>
-            <p>
-              Gestiona equipos, sedes, cuentas de Mercado Pago, QR dinamico, telemetria,
-              comandos remotos, OTA, usuarios, permisos y reportes comerciales.
-            </p>
-          </article>
-          <article class="platform-card">
-            <p class="card-kicker">Consumo corporativo</p>
+            <p class="platform-desc">Gestioná toda tu flota de máquinas expendedoras y cobros digitales desde un panel centralizado. Ideado para optimizar costos de reposición y maximizar las ventas sin efectivo.</p>
+            <ul class="platform-features-list">
+              <li><span class="material-symbols-rounded">check_circle</span> Dashboard de ventas en tiempo real</li>
+              <li><span class="material-symbols-rounded">check_circle</span> Configuración de pagos QR estáticos y dinámicos</li>
+              <li><span class="material-symbols-rounded">check_circle</span> Alertas inteligentes de desconexión y fallas del sistema</li>
+              <li><span class="material-symbols-rounded">check_circle</span> Integración directa con Mercado Pago y pasarelas de pago</li>
+              <li><span class="material-symbols-rounded">check_circle</span> Soporte multi-tenant para administrar múltiples clientes o flotas</li>
+            </ul>
+          </div>
+          <div class="platform-visual">
+            <div class="dashboard-mockup">
+              <div class="dashboard-header">
+                <div class="dashboard-title"><span class="status-indicator"></span> SmartQ Control — Panel General</div>
+                <div class="dashboard-user">Operador Vending</div>
+              </div>
+              <div class="dashboard-body">
+                <div class="dashboard-stats">
+                  <div class="dashboard-stat-card">
+                    <div class="stat-label">Ventas MP</div>
+                    <div class="stat-value">$148.500</div>
+                  </div>
+                  <div class="dashboard-stat-card">
+                    <div class="stat-label">Equipos</div>
+                    <div class="stat-value">85 / 85</div>
+                  </div>
+                  <div class="dashboard-stat-card">
+                    <div class="stat-label">Rendimiento</div>
+                    <div class="stat-value">99.4%</div>
+                  </div>
+                </div>
+                <div class="dashboard-visual-section">
+                  <div class="section-label">Historial de Ventas Semanal <span style="font-weight: normal; color: var(--slate-400);">Monitoreo IoT</span></div>
+                  <div class="chart-container-large">
+                    <div class="chart-grid-line line-50"></div>
+                    <div class="chart-grid-line line-100"></div>
+                    <!-- Using CSS Variables so heights animate smoothly when tab goes active -->
+                    <div class="chart-bar-large" style="--bar-height: 35%;"><span class="chart-bar-label">Lun</span></div>
+                    <div class="chart-bar-large" style="--bar-height: 60%;"><span class="chart-bar-label">Mar</span></div>
+                    <div class="chart-bar-large" style="--bar-height: 50%;"><span class="chart-bar-label">Mié</span></div>
+                    <div class="chart-bar-large" style="--bar-height: 80%;"><span class="chart-bar-label">Jue</span></div>
+                    <div class="chart-bar-large" style="--bar-height: 70%;"><span class="chart-bar-label">Vie</span></div>
+                    <div class="chart-bar-large" style="--bar-height: 95%;"><span class="chart-bar-label">Sáb</span></div>
+                    <div class="chart-bar-large" style="--bar-height: 85%;"><span class="chart-bar-label">Dom</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: SmartQ CoffeeControl -->
+        <div class="tab-content" id="tab-coffee">
+          <div class="platform-info">
+            <span class="platform-badge badge-secondary">Cafeteras Corporativas</span>
             <h3>SmartQ CoffeeControl</h3>
-            <p>
-              Controla maquinas de cafe con NFC, reglas por empleado, limites diarios, stock,
-              reportes por area y herramientas para gerente, tecnico y distribuidor.
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section flow" id="flujo">
-        <div class="section-heading">
-          <p class="eyebrow">Diferencial SmartQ</p>
-          <h2>Mas que cobrar: controlar, medir y operar la maquina.</h2>
-        </div>
-        <div class="flow-steps">
-          <div class="step">
-            <span>1</span>
-            <h3>QR contextual</h3>
-            <p>Cada operacion puede responder a maquina, precio, estado, regla, usuario o sesion.</p>
-          </div>
-          <div class="step">
-            <span>2</span>
-            <h3>Control fisico</h3>
-            <p>El hardware SmartQ habilita la entrega real: agua caliente, credito MDB, pulso, relay o tiempo.</p>
-          </div>
-          <div class="step">
-            <span>3</span>
-            <h3>Telemetria</h3>
-            <p>La plataforma registra ventas, contadores, estados, eventos tecnicos y actividad por equipo.</p>
-          </div>
-          <div class="step">
-            <span>4</span>
-            <h3>Retrofit real</h3>
-            <p>Se adapta a expendedoras existentes sin reemplazar la maquina ni perder su logica de uso.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section advantages" id="ventajas">
-        <div class="advantage-lead">
-          <p class="eyebrow">Ventajas estrategicas</p>
-          <h2>Una forma mas simple de cobrar, ajustar precios y operar maquinas reales.</h2>
-          <p>
-            SmartQ prepara tus equipos para un escenario cada vez mas digital: menos dependencia
-            de efectivo, menos visitas operativas y mas control desde un panel centralizado.
-          </p>
-          <div class="machine-panel" aria-label="Panel operativo SmartQ">
-            <div>
-              <span>Modo</span>
-              <strong>Tiempo / Pulso / ON-OFF</strong>
-            </div>
-            <div>
-              <span>Precio</span>
-              <strong>Remoto</strong>
-            </div>
-            <div>
-              <span>QR</span>
-              <strong>Dinamico</strong>
-            </div>
-            <div>
-              <span>Estado</span>
-              <strong>Habilitado</strong>
-            </div>
-          </div>
-        </div>
-
-        <div class="advantage-board">
-          <div class="advantage-group">
-            <h3>Para el negocio</h3>
-            <ul>
-              <li>Incorpora pagos digitales sin cambiar la maquina existente.</li>
-              <li>Reduce friccion: el cliente escanea, paga y el servicio se activa.</li>
-              <li>Ayuda a mejorar el ticket promedio y a cobrar el precio configurado para cada servicio.</li>
-              <li>Permite ajustar precios a distancia desde SmartQ Control.</li>
-              <li>Centraliza ventas, estados, contadores y actividad por equipo.</li>
-              <li>Disminuye perdidas por billetes rechazados, falta de cambio o trabas mecanicas.</li>
-              <li>Deja la operacion preparada para facturacion e integraciones futuras.</li>
+            <p class="platform-desc">Un control de consumo de café corporativo inteligente para oficinas modernas. Identificá a tus empleados por NFC, gestioná raciones de cortesía por perfil y obtené reportes listos para facturación.</p>
+            <ul class="platform-features-list">
+              <li><span class="material-symbols-rounded">check_circle</span> Identificación instantánea mediante credenciales NFC</li>
+              <li><span class="material-symbols-rounded">check_circle</span> Límite y raciones configurables por usuario o departamento</li>
+              <li><span class="material-symbols-rounded">check_circle</span> Reportes mensuales automatizados de consumo de insumos</li>
+              <li><span class="material-symbols-rounded">check_circle</span> Facturación automática consolidada por consumo corporativo</li>
+              <li><span class="material-symbols-rounded">check_circle</span> Integración directa con protocolo MDB y sistemas embebidos</li>
             </ul>
           </div>
-          <div class="advantage-group accent">
-            <h3>Frente al efectivo y al QR estatico</h3>
-            <ul>
-              <li>QR dinamico por operacion: evita etiquetas superpuestas o codigos falsos.</li>
-              <li>Activacion instantanea: no depende de llegar a un monto exacto.</li>
-              <li>Modos configurables para tiempo, pulsos, multipulsos, toggle y ON/OFF.</li>
-              <li>Precio configurable sin modificar firmware por cambios de billetes o monedas.</li>
-              <li>Compatible con medios digitales y billeteras soportadas por la pasarela de pago.</li>
-              <li>Recaudacion digital directa y menos traslado de dinero fisico.</li>
-            </ul>
+          <div class="platform-visual">
+            <div class="dashboard-mockup">
+              <div class="dashboard-header">
+                <div class="dashboard-title"><span class="status-indicator" style="background-color: var(--amber);"></span> CoffeeControl — Oficinas Centrales</div>
+                <div class="dashboard-user">Administración RRHH</div>
+              </div>
+              <div class="dashboard-body">
+                <div class="dashboard-stats">
+                  <div class="dashboard-stat-card">
+                    <div class="stat-label">Cafés Hoy</div>
+                    <div class="stat-value">124</div>
+                  </div>
+                  <div class="dashboard-stat-card">
+                    <div class="stat-label">Usuarios Activos</div>
+                    <div class="stat-value">412</div>
+                  </div>
+                  <div class="dashboard-stat-card">
+                    <div class="stat-label">Crédito Rest.</div>
+                    <div class="stat-value">Ilimitado</div>
+                  </div>
+                </div>
+                <div class="dashboard-visual-section">
+                  <div class="section-label">Últimos Consumos NFC <span style="font-weight: normal; color: var(--slate-400);">Lector MQTT</span></div>
+                  <div class="coffee-list">
+                    <div class="coffee-list-item">
+                      <div class="user-info"><span class="user-badge-indicator"></span> Martin Scaramuzzino</div>
+                      <div class="user-amount">Café Doble — 10:14 hs</div>
+                    </div>
+                    <div class="coffee-list-item">
+                      <div class="user-info"><span class="user-badge-indicator"></span> Carolina Depetris</div>
+                      <div class="user-amount">Lágrima Suave — 10:08 hs</div>
+                    </div>
+                    <div class="coffee-list-item">
+                      <div class="user-info"><span class="user-badge-indicator"></span> Franco Destéfano</div>
+                      <div class="user-amount">Capuchino Canela — 09:54 hs</div>
+                    </div>
+                    <div class="coffee-list-item">
+                      <div class="user-info"><span class="user-badge-indicator"></span> Sofía Rodríguez</div>
+                      <div class="user-amount">Espresso Solo — 09:42 hs</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
+    </div>
+  </section>
 
-      <section class="section proof">
-        <div class="proof-copy">
-          <p class="eyebrow">Producto instalado</p>
-          <h2>Pagos digitales para cobrar, hardware para activar, plataforma para controlar.</h2>
-        </div>
-        <div class="proof-metrics">
-          <div><strong>Agua</strong><span>expendedoras con control completo</span></div>
-          <div><strong>QR</strong><span>pago dinamico por sesion o regla</span></div>
-          <div><strong>Control</strong><span>hardware, telemetria y backoffice</span></div>
-        </div>
-      </section>
+  <!-- DISPOSITIVOS DE HARDWARE -->
+  <section class="section section-dark" id="dispositivos">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-tag section-tag-light">Hardware IoT</span>
+        <h2>Dispositivos Inteligentes SmartQ</h2>
+        <p>Equipos electrónicos diseñados para integrarse de forma no invasiva en cualquier expendedora y habilitar el canal digital.</p>
+      </div>
 
-      <section class="section contact" id="contacto">
-        <div>
-          <p class="eyebrow">Consulta SmartQ</p>
-          <h2>Contanos que maquina queres convertir.</h2>
-          <p>
-            Evaluamos si tu caso entra por MDB, QR dinamico, NFC, validador de monedas,
-            pulso, relay, control temporizado o control completo para expendedoras de agua caliente.
-          </p>
+      <div class="hardware-grid reveal-on-scroll">
+        <!-- Vending Hardware -->
+        <div class="hardware-card">
+          <div class="hardware-img-container">
+            <img src="assets/vending_device.jpg" alt="Dispositivo SmartQ Pulse / Pay MDB" class="hardware-img">
+          </div>
+          <div class="hardware-card-body">
+            <div class="hardware-tags">
+              <span class="hardware-tag tag-vending">Vending IoT</span>
+              <span class="hardware-tag">Pagos QR</span>
+            </div>
+            <h3>SmartQ Pulse / Pay MDB</h3>
+            <p>Nuestra controladora insignia para máquinas expendedoras tradicionales. Permite incorporar cobro con códigos QR dinámicos interactuando con validadores de pulsos o conectándose directamente al bus MDB original de la máquina. Habilitación de venta remota en menos de 1 segundo.</p>
+            <div class="hardware-features-inline">
+              <div class="hardware-feature-item"><span class="material-symbols-rounded">check</span> MDB Bus / Relay</div>
+              <div class="hardware-feature-item"><span class="material-symbols-rounded">check</span> Pantalla QR OLED</div>
+              <div class="hardware-feature-item"><span class="material-symbols-rounded">check</span> MQTT / OTA Firmware</div>
+            </div>
+          </div>
         </div>
-        <form
-          class="contact-form"
-          action="/api/contact"
-          method="POST"
-        >
-          <input class="form-honey" type="text" name="_honey" tabindex="-1" autocomplete="off" />
-          <label>
-            Nombre
-            <input type="text" name="name" placeholder="Tu nombre" required autocomplete="name" />
-          </label>
-          <label>
-            Email
-            <input type="email" name="email" placeholder="nombre@empresa.com" required autocomplete="email" />
-          </label>
-          <label>
-            Telefono
-            <input type="tel" name="phone" placeholder="+54 9..." autocomplete="tel" />
-          </label>
-          <label>
-            Maquina o servicio
-            <textarea name="message" rows="4" placeholder="Vending, cafe, agua caliente, aire, lavadero..." required></textarea>
-          </label>
-          <button class="button primary" type="submit">Enviar consulta</button>
-          <p class="form-status" role="status" aria-live="polite"></p>
-        </form>
-      </section>
-    </main>
 
-    <footer class="footer">
-      <span>SmartQ</span>
-      <span>La capa inteligente para maquinas autoservicio.</span>
-    </footer>
-    <script src="script.js?v=google-mail-20260517"></script>
-  </body>
+        <!-- Coffee NFC Hardware -->
+        <div class="hardware-card">
+          <div class="hardware-img-container">
+            <img src="assets/coffee_device.jpg" alt="Dispositivo SmartQ Coffee Link" class="hardware-img">
+          </div>
+          <div class="hardware-card-body">
+            <div class="hardware-tags">
+              <span class="hardware-tag tag-coffee">Coffee Control</span>
+              <span class="hardware-tag">NFC Reader</span>
+            </div>
+            <h3>SmartQ Coffee Link / TermoControl</h3>
+            <p>Módulo de control de acceso para cafeteras industriales de oficina y expendedoras de agua caliente. Integra un lector de tarjetas RFID/NFC ultrarrápido y controladoras para electroválvulas MDB. Permite habilitar consumos controlados de café e infusiones por credencial corporativa.</p>
+            <div class="hardware-features-inline">
+              <div class="hardware-feature-item"><span class="material-symbols-rounded">check</span> RFID / NFC 13.56 MHz</div>
+              <div class="hardware-feature-item"><span class="material-symbols-rounded">check</span> Sensores Temp</div>
+              <div class="hardware-feature-item"><span class="material-symbols-rounded">check</span> Control de Raciones</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIMULADOR INTERACTIVO IoT (SVG Ecosystem Flow) -->
+  <section class="section bg-grid" id="simulador">
+    <div class="glow-spot glow-primary" style="width: 450px; height: 450px; bottom: -60px; left: 5%; opacity: 0.5;"></div>
+    <div class="glow-spot" style="width: 300px; height: 300px; top: 10%; right: 8%; background: radial-gradient(circle, #217EB4 0%, transparent 70%); opacity: 0.25; filter: blur(80px);"></div>
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-tag">Demostración interactiva</span>
+        <h2>Ecosistema IoT en Acción</h2>
+        <p>Mirá cómo fluyen los datos y comandos de habilitación de forma instantánea a través de la nube SmartQ.</p>
+      </div>
+
+      <div class="sim-container reveal-on-scroll">
+        <div class="sim-diagram-wrapper">
+          
+          <!-- SVG Connectors with animated dashed line & glowing path pulse overlays -->
+          <svg class="sim-svg-connectors" viewBox="0 0 800 300">
+            <!-- Path 1: Node 1 to Node 2 (Left to Center) -->
+            <path id="path1" class="flow-connector-line" d="M 150 150 Q 275 80 400 150" />
+            <path id="pulsePath1" class="sim-pulse-line" d="M 150 150 Q 275 80 400 150" />
+
+            <!-- Path 2: Node 2 to Node 3 (Center to Right) -->
+            <path id="path2" class="flow-connector-line" d="M 400 150 Q 525 220 650 150" />
+            <path id="pulsePath2" class="sim-pulse-line" d="M 400 150 Q 525 220 650 150" />
+          </svg>
+
+          <!-- Node 1: Cliente / Pago QR -->
+          <div class="sim-node" id="node1">
+            <div class="sim-node-status" id="status1">
+              <span class="status-dot"></span> Pago Iniciado
+            </div>
+            <div class="sim-node-icon"><span class="material-symbols-rounded">qr_code_2</span></div>
+            <h4>1. Cliente / Pago QR</h4>
+            <p>El cliente escanea el QR desde su celular y confirma la transacción de pago.</p>
+          </div>
+
+          <!-- Node 2: SmartQ Broker Cloud -->
+          <div class="sim-node" id="node2">
+            <div class="sim-node-status" id="status2">
+              <span class="status-dot"></span> Procesando MQTT
+            </div>
+            <div class="sim-node-icon"><span class="material-symbols-rounded">cloud_sync</span></div>
+            <h4>2. Nube SmartQ</h4>
+            <p>El broker recibe la validación y procesa el comando seguro para el equipo.</p>
+          </div>
+
+          <!-- Node 3: Dispositivo IoT -->
+          <div class="sim-node" id="node3">
+            <div class="sim-node-status" id="status3">
+              <span class="status-dot green"></span> Despachando
+            </div>
+            <div class="sim-node-icon"><span class="material-symbols-rounded">settings_input_component</span></div>
+            <h4>3. Dispositivo IoT</h4>
+            <p>La placa embebida recibe el comando de venta y habilita el despacho físico.</p>
+          </div>
+
+        </div>
+
+        <!-- Flow Controller Trigger -->
+        <div class="sim-trigger-container">
+          <span class="sim-btn-desc" id="simDesc">Iniciando flujo automático...</span>
+          <button class="simulator-btn" id="btnSimular">
+            <span class="material-symbols-rounded">replay</span> Repetir simulación
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFICIOS -->
+  <section class="section" id="beneficios">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-tag">Por qué elegir SmartQ</span>
+        <h2>Ventajas de la Digitalización IoT</h2>
+        <p>Todo el ecosistema diseñado para simplificar tu operativa, reducir pérdidas y aumentar la productividad de tu flota.</p>
+      </div>
+
+      <div class="benefits-grid reveal-on-scroll">
+        <!-- 1 -->
+        <div class="benefit-card">
+          <div class="benefit-icon-container">
+            <span class="material-symbols-rounded">rocket_launch</span>
+          </div>
+          <h4>Implementación Rápida</h4>
+          <p>Se instala en minutos en tus expendedoras existentes sin necesidad de reformar la electrónica interna original del equipo.</p>
+        </div>
+        <!-- 2 -->
+        <div class="benefit-card">
+          <div class="benefit-icon-container">
+            <span class="material-symbols-rounded">payments</span>
+          </div>
+          <h4>Pagos 100% Digitales</h4>
+          <p>Integración directa con Mercado Pago y billeteras QR compatibles para cobrar sin efectivo, sin tarjetas y sin fricción física.</p>
+        </div>
+        <!-- 3 -->
+        <div class="benefit-card">
+          <div class="benefit-icon-container">
+            <span class="material-symbols-rounded">bar_chart</span>
+          </div>
+          <h4>Reportes en Vivo</h4>
+          <p>Mapeo completo de consumos, ventas históricas y facturación consolidada por máquina o cliente desde el portal SaaS.</p>
+        </div>
+        <!-- 4 -->
+        <div class="benefit-card benefit-card-soon">
+          <span class="benefit-soon-badge">Próximamente</span>
+          <div class="benefit-icon-container">
+            <span class="material-symbols-rounded">notifications_active</span>
+          </div>
+          <h4>Alertas Automatizadas</h4>
+          <p>Notificaciones inmediatas al instante por Telegram o WhatsApp cuando una máquina se queda sin energía o reporta fallas.</p>
+        </div>
+        <!-- 5 -->
+        <div class="benefit-card">
+          <div class="benefit-icon-container">
+            <span class="material-symbols-rounded">devices_other</span>
+          </div>
+          <h4>Consola Multi-dispositivo</h4>
+          <p>Estructura multi-tenant robusta para que puedas agrupar y filtrar cientos de expendedoras en múltiples zonas geográficas.</p>
+        </div>
+        <!-- 6 -->
+        <div class="benefit-card">
+          <div class="benefit-icon-container">
+            <span class="material-symbols-rounded">cloud_sync</span>
+          </div>
+          <h4>Ecosistema Seguro</h4>
+          <p>Canal de comunicación MQTT cifrado bajo TLS. Firmware robusto con soporte de actualizaciones vía OTA automáticas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="section section-gradient" id="contacto">
+    <div class="container">
+      <div class="contact-layout reveal-on-scroll">
+        <!-- Text details panel -->
+        <div class="contact-info-panel">
+          <span class="section-tag section-tag-light">Contacto</span>
+          <h3>¿Listo para digitalizar tu negocio?</h3>
+          <p>Escribinos detallando el tipo de flota de máquinas (expendedoras, cafeteras, expendedoras de agua) que tenés y te asesoramos para implementar SmartQ.</p>
+          
+          <div class="contact-methods">
+            <div class="contact-method-card">
+              <div class="contact-method-icon"><span class="material-symbols-rounded">mail</span></div>
+              <div class="contact-method-details">
+                <h5>Email de contacto</h5>
+                <p>info@smartq.com.ar</p>
+              </div>
+            </div>
+            <div class="contact-method-card">
+              <div class="contact-method-icon"><span class="material-symbols-rounded">globe</span></div>
+              <div class="contact-method-details">
+                <h5>Sitio Oficial</h5>
+                <p>smartq.com.ar</p>
+              </div>
+            </div>
+            <div class="contact-method-card">
+              <div class="contact-method-icon"><span class="material-symbols-rounded">location_on</span></div>
+              <div class="contact-method-details">
+                <h5>Ubicación</h5>
+                <p>Buenos Aires, Argentina</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact form card -->
+        <div class="contact-card-form">
+          <form class="contact-form" id="contactForm">
+            <input type="text" id="honey" name="_honey" class="form-honeypot" tabindex="-1" autocomplete="off">
+            <div class="form-grid">
+              <div class="form-field">
+                <label for="name">Nombre Completo</label>
+                <input type="text" id="name" class="form-control" placeholder="Tu nombre" required>
+              </div>
+              <div class="form-field">
+                <label for="email">Dirección de Email</label>
+                <input type="email" id="email" class="form-control" placeholder="tu@empresa.com" required>
+              </div>
+              <div class="form-field">
+                <label for="company">Empresa / Razón Social</label>
+                <input type="text" id="company" class="form-control" placeholder="Nombre de tu empresa">
+              </div>
+              <div class="form-field">
+                <label for="message">Mensaje / Consulta</label>
+                <textarea id="message" class="form-control" placeholder="Contanos qué tipo de expendedoras gestionás..." required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block" style="margin-top: 10px;">
+                <span class="material-symbols-rounded">send</span> Enviar Mensaje
+              </button>
+              <p class="form-status" id="formStatus" aria-live="polite"></p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="assets/isotipo.png" alt="SmartQ" class="footer-logo">
+          <p>Transformación digital y conectividad inteligente para expendedoras tradicionales y café corporativo.</p>
+        </div>
+        <div class="footer-links-grid">
+          <div class="footer-col">
+            <h5>Plataformas</h5>
+            <a href="#plataformas">SmartQ Control</a>
+            <a href="#plataformas">SmartQ CoffeeControl</a>
+          </div>
+          <div class="footer-col">
+            <h5>Hardware</h5>
+            <a href="#dispositivos">SmartQ Pulse</a>
+            <a href="#dispositivos">SmartQ Pay MDB</a>
+            <a href="#dispositivos">Coffee Link / TermoControl</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-bottom-container">
+          <p>&copy; 2026 SmartQ. Todos los derechos reservados.</p>
+          <div class="footer-bottom-links">
+            <a href="#">Privacidad</a>
+            <a href="#">Términos y condiciones</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WHATSAPP FLOATING BUTTON -->
+  <a
+    href="https://wa.me/5492236690217?text=Hola%20SmartQ%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n"
+    class="whatsapp-float"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Escribinos por WhatsApp"
+  >
+    <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.669.15-.198.297-.767.966-.94 1.164-.173.198-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.226 1.36.194 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+      <path d="M12.05 21.785h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.002-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.83 9.83 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884M20.52 3.449C18.24 1.245 15.24 0 12.05 0 5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893 0-3.176-1.237-6.165-3.423-8.452"/>
+    </svg>
+  </a>
+
+  <script src="js/script.js"></script>
+</body>
 </html>
