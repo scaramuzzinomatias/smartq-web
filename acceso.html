@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartQ — Acceso</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:'Poppins',sans-serif;
+      min-height:100vh;
+      background:#0F172A;
+      display:flex;flex-direction:column;
+      align-items:center;justify-content:center;
+      padding:40px 24px;
+    }
+    .back{
+      position:fixed;top:24px;left:24px;
+      font-size:13px;color:rgba(255,255,255,0.8);
+      text-decoration:none;display:flex;align-items:center;gap:6px;
+      transition:color 0.2s;
+    }
+    .back:hover{color:#fff}
+    .top-logo{
+      display:flex;align-items:center;gap:12px;
+      margin-bottom:40px;
+    }
+    .top-logo img{height:48px;width:auto}
+    .tagline{
+      font-size:15px;color:rgba(255,255,255,0.85);
+      margin-bottom:40px;text-align:center;font-weight:500;
+    }
+    .cards{
+      display:flex;gap:24px;flex-wrap:wrap;
+      justify-content:center;width:100%;max-width:720px;
+    }
+    .card{
+      flex:1;min-width:280px;max-width:320px;
+      background:#fff;border-radius:20px;
+      padding:40px 32px;
+      text-decoration:none;color:#2D3340;
+      transition:all 0.25s;text-align:center;
+      display:flex;flex-direction:column;align-items:center;gap:20px;
+      box-shadow:0 8px 32px rgba(0,0,0,0.15);
+    }
+    .card:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(0,0,0,0.25)}
+    .card-logo-wrap{
+      width:80px;height:80px;border-radius:18px;
+      display:flex;align-items:center;justify-content:center;
+      overflow:hidden;
+    }
+    .card-logo-wrap img{width:100%;height:auto}
+    .coffee-logo{
+      background:linear-gradient(135deg,#4A2C0A,#8B5E3C);
+      width:80px;height:80px;border-radius:18px;
+      display:flex;flex-direction:column;
+      align-items:center;justify-content:center;gap:2px;
+    }
+    .coffee-logo span{font-size:26px}
+    .coffee-logo small{font-size:9px;color:rgba(255,255,255,0.7);font-weight:600;letter-spacing:1px}
+    .card h2{font-size:20px;font-weight:700;color:#2D3340;letter-spacing:-0.3px}
+    .card p{font-size:13px;color:#6B7280;line-height:1.6}
+    .card-btn{
+      width:100%;padding:13px;border-radius:10px;
+      font-size:14px;font-weight:700;
+      transition:all 0.2s;
+    }
+    .btn-blue{background:linear-gradient(135deg,#217EB4,#009EE9);color:#fff}
+    .card:hover .btn-blue{opacity:0.9}
+    .btn-coffee{background:linear-gradient(135deg,#4A2C0A,#8B5E3C);color:#fff}
+    .card:hover .btn-coffee{opacity:0.9}
+    footer{
+      margin-top:40px;font-size:12px;
+      color:rgba(255,255,255,0.6);text-align:center;
+    }
+    footer a{color:rgba(255,255,255,0.6);text-decoration:none}
+    footer a:hover{color:#fff}
+    @media(max-width:600px){
+      .cards{flex-direction:column;align-items:center}
+      .card{max-width:100%}
+    }
+  </style>
+</head>
+<body>
+  <a href="/" class="back">← Volver al inicio</a>
+
+  <div class="top-logo">
+    <img src="/assets/smartq-mark.png" alt="SmartQ">
+  </div>
+
+  <p class="tagline">Seleccioná la plataforma a la que querés acceder</p>
+
+  <div class="cards">
+    <a href="https://control.smartq.com.ar" class="card">
+      <div class="card-logo-wrap" style="background:#EFF8FF">
+        <img src="/assets/smartq-mark.png" alt="SmartQ Control">
+      </div>
+      <div>
+        <h2>SmartQ Control</h2>
+        <p style="margin-top:8px">Gestión de dispositivos, pagos QR, monitoreo y reportes para máquinas autoservicio.</p>
+      </div>
+      <div class="card-btn btn-blue">Acceder →</div>
+    </a>
+
+    <a href="https://coffeecontrol.smartq.com.ar" class="card">
+      <div class="coffee-logo">
+        <span>☕</span>
+        <small>COFFEE</small>
+      </div>
+      <div>
+        <h2>CoffeeControl</h2>
+        <p style="margin-top:8px">Plataforma especializada para gestión de máquinas de café y bebidas calientes.</p>
+      </div>
+      <div class="card-btn btn-coffee">Acceder →</div>
+    </a>
+  </div>
+
+  <footer>© 2026 SmartQ · <a href="/">smartq.com.ar</a></footer>
+</body>
+</html>
