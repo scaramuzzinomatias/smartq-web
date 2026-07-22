@@ -514,6 +514,18 @@
                 <input type="email" id="email" class="form-control" placeholder="tu@empresa.com" required>
               </div>
               <div class="form-field">
+                <label for="phone">Teléfono / WhatsApp</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  class="form-control"
+                  placeholder="+54 9 11 2345 6789"
+                  pattern="^\+?[0-9\s\-\(\)]{8,20}$"
+                  title="Ingresá un teléfono válido (8 a 20 caracteres, solo números, espacios, guiones o paréntesis)"
+                  required
+                >
+              </div>
+              <div class="form-field">
                 <label for="company">Empresa / Razón Social</label>
                 <input type="text" id="company" class="form-control" placeholder="Nombre de tu empresa">
               </div>

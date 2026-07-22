@@ -275,11 +275,19 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
-  // 7. CONTACT FORM SUBMIT (envío real al backend /api/contact)
+  // 7. CONTACT FORM SUBMIT (envío vía Google Apps Script → Gmail)
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxe0GqTSK_5QZbnlE6mtoNu0plWNlnwWpYHXCnwJhC3Dc-Ss5kJlAWZQ_GYpniutxgt/exec";
   const contactForm = document.getElementById('contactForm');
   const formStatus = document.getElementById('formStatus');
 
   if (contactForm) {
+    const isValidPhone = (value) => {
+      const cleaned = value.trim();
+      if (!/^\+?[0-9\s\-()]{8,20}$/.test(cleaned)) return false;
+      const digitsOnly = cleaned.replace(/\D/g, '');
+      return digitsOnly.length >= 8 && digitsOnly.length <= 15;
+    };
+
     contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
@@ -288,9 +296,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const name = document.getElementById('name').value;
       const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value.trim();
       const company = document.getElementById('company').value.trim();
       const message = document.getElementById('message').value;
       const honey = document.getElementById('honey') ? document.getElementById('honey').value : '';
+
+      if (!isValidPhone(phone)) {
+        if (formStatus) {
+          formStatus.textContent = 'Ingresá un teléfono válido (solo números, 8 a 15 dígitos).';
+          formStatus.className = 'form-status error';
+        }
+        document.getElementById('phone').focus();
+        return;
+      }
 
       const fullMessage = company ? `Empresa: ${company}\n\n${message}` : message;
 
@@ -304,16 +322,25 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       try {
-        const response = await fetch('/api/contact', {
+        const formData = new URLSearchParams();
+        formData.append('name', name);
+        formData.append('email', email);
+        formData.append('phone', phone);
+        formData.append('message', fullMessage);
+        formData.append('source', 'SmartQ Web');
+        formData.append('page', window.location.pathname);
+        formData.append('sent_at', new Date().toISOString());
+        formData.append('_honey', honey);
+
+        const response = await fetch(GOOGLE_SCRIPT_URL, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, email, message: fullMessage, _honey: honey })
+          body: formData
         });
 
-        const data = await response.json().catch(() => ({}));
+        const text = await response.text().catch(() => '');
 
-        if (!response.ok || !data.ok) {
-          throw new Error(data.message || 'No se pudo enviar la consulta.');
+        if (!response.ok || text.trim() !== 'OK') {
+          throw new Error('No se pudo enviar la consulta.');
         }
 
         btn.innerHTML = '<span class="material-symbols-rounded">check_circle</span> Mensaje enviado con éxito';
