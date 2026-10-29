@@ -5,118 +5,187 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SmartQ — Acceso</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
   <style>
+    /* Mismo fondo, tarjeta, Q y titulo que el login de SmartQ Control (control.smartq.com.ar/login): al elegir SmartQ Control la tarjeta
+       crece hasta quedar igual a la del login (380 px, alto 400 px, radio 24 px, relleno 32 px). Si se cambian esas medidas en el login
+       (FrontEnd/components/auth/auth-shell.tsx del repo SmartQ-Control), hay que cambiarlas aca tambien (constantes del script). */
     *{box-sizing:border-box;margin:0;padding:0}
+    html,body{min-height:100%}
     body{
-      font-family:'Poppins',sans-serif;
-      min-height:100vh;
-      background:#0F172A;
+      font-family:'Inter',system-ui,sans-serif;
+      min-height:100vh;min-height:100dvh;
+      background:linear-gradient(to bottom,#020617,#0f172a);
+      color:#f1f5f9;
       display:flex;flex-direction:column;
+    }
+    .stage{
+      flex:1;display:flex;flex-direction:column;
       align-items:center;justify-content:center;
-      padding:40px 24px;
+      padding:32px 16px;
     }
     .back{
       position:fixed;top:24px;left:24px;
-      font-size:13px;color:rgba(255,255,255,0.8);
-      text-decoration:none;display:flex;align-items:center;gap:6px;
-      transition:color 0.2s;
+      font-size:13px;color:#94a3b8;text-decoration:none;
+      transition:color .2s,opacity .25s;
     }
     .back:hover{color:#fff}
-    .top-logo{
-      display:flex;align-items:center;gap:12px;
-      margin-bottom:40px;
-    }
-    .top-logo img{height:48px;width:auto}
     .tagline{
-      font-size:15px;color:rgba(255,255,255,0.85);
-      margin-bottom:40px;text-align:center;font-weight:500;
+      font-size:15px;color:#cbd5e1;font-weight:500;
+      text-align:center;margin-bottom:28px;
+      transition:opacity .25s;
     }
     .cards{
-      display:flex;gap:24px;flex-wrap:wrap;
-      justify-content:center;width:100%;max-width:720px;
+      display:flex;gap:24px;flex-wrap:wrap;justify-content:center;
+      width:100%;max-width:720px;
     }
     .card{
-      flex:1;min-width:280px;max-width:320px;
-      background:#fff;border-radius:20px;
-      padding:40px 32px;
-      text-decoration:none;color:#2D3340;
-      transition:all 0.25s;text-align:center;
-      display:flex;flex-direction:column;align-items:center;gap:20px;
-      box-shadow:0 8px 32px rgba(0,0,0,0.15);
+      flex:1;min-width:280px;max-width:340px;
+      background:#0f172a;border:1px solid #1e293b;border-radius:24px;
+      padding:32px;
+      text-decoration:none;color:#f1f5f9;text-align:center;
+      display:flex;flex-direction:column;align-items:center;
+      box-shadow:0 25px 50px -12px rgba(0,0,0,.5);
+      transition:transform .25s,border-color .25s,opacity .3s;
     }
-    .card:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(0,0,0,0.25)}
-    .card-logo-wrap{
-      width:80px;height:80px;border-radius:18px;
-      display:flex;align-items:center;justify-content:center;
-      overflow:hidden;
+    .card:hover{transform:translateY(-4px);border-color:#334155}
+    .tile{
+      width:64px;height:64px;border-radius:16px;background:#fff;padding:8px;
+      display:flex;align-items:center;justify-content:center;flex:none;
     }
-    .card-logo-wrap img{width:100%;height:auto}
-    .coffee-logo{
-      background:linear-gradient(135deg,#4A2C0A,#8B5E3C);
-      width:80px;height:80px;border-radius:18px;
-      display:flex;flex-direction:column;
-      align-items:center;justify-content:center;gap:2px;
+    .tile img{width:100%;height:100%;object-fit:contain}
+    .tile.coffee{background:linear-gradient(135deg,#4A2C0A,#8B5E3C);padding:0;flex-direction:column;gap:1px}
+    .tile.coffee span{font-size:24px;line-height:1}
+    .tile.coffee small{font-size:8px;color:rgba(255,255,255,.75);font-weight:600;letter-spacing:1px}
+    .card h2{
+      font-family:'Poppins',sans-serif;font-weight:700;
+      font-size:24px;letter-spacing:-.025em;color:#fff;
+      margin-top:16px;line-height:32px;
     }
-    .coffee-logo span{font-size:26px}
-    .coffee-logo small{font-size:9px;color:rgba(255,255,255,0.7);font-weight:600;letter-spacing:1px}
-    .card h2{font-size:20px;font-weight:700;color:#2D3340;letter-spacing:-0.3px}
-    .card p{font-size:13px;color:#6B7280;line-height:1.6}
+    .card-rest{
+      width:100%;margin-top:12px;
+      display:flex;flex-direction:column;align-items:center;gap:24px;flex:1;
+      transition:opacity .2s;
+    }
+    .card p{font-size:13px;color:#94a3b8;line-height:1.6}
     .card-btn{
-      width:100%;padding:13px;border-radius:10px;
-      font-size:14px;font-weight:700;
-      transition:all 0.2s;
+      width:100%;height:40px;border-radius:12px;margin-top:auto;
+      display:flex;align-items:center;justify-content:center;
+      font-size:14px;font-weight:600;color:#fff;
+      background:#0369a1;transition:background .2s;
     }
-    .btn-blue{background:linear-gradient(135deg,#217EB4,#009EE9);color:#fff}
-    .card:hover .btn-blue{opacity:0.9}
-    .btn-coffee{background:linear-gradient(135deg,#4A2C0A,#8B5E3C);color:#fff}
-    .card:hover .btn-coffee{opacity:0.9}
+    .card:hover .card-btn{background:#0284c7}
+    .btn-coffee{background:linear-gradient(135deg,#4A2C0A,#8B5E3C)}
+    .card:hover .btn-coffee{background:linear-gradient(135deg,#5b3610,#9c6b47)}
     footer{
-      margin-top:40px;font-size:12px;
-      color:rgba(255,255,255,0.6);text-align:center;
+      padding:16px;text-align:center;font-size:12px;line-height:10px;
+      color:#64748b;
     }
-    footer a{color:rgba(255,255,255,0.6);text-decoration:none}
+    footer a{color:inherit;text-decoration:none}
     footer a:hover{color:#fff}
-    @media(max-width:600px){
+
+    /* Transformacion hacia el login */
+    body.leaving .back,body.leaving .tagline,body.leaving .card:not(.chosen):not(.morph),body.leaving footer{opacity:0;pointer-events:none}
+    body.leaving .card.chosen{visibility:hidden}
+    .morph{
+      position:fixed;z-index:50;margin:0;
+      transition:left .6s cubic-bezier(.22,1,.36,1),top .6s cubic-bezier(.22,1,.36,1),width .6s cubic-bezier(.22,1,.36,1),height .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1);
+      transform:none !important;pointer-events:none;
+    }
+    .morph .card-rest{opacity:0}
+    @media(max-width:620px){
       .cards{flex-direction:column;align-items:center}
       .card{max-width:100%}
+    }
+    @media(max-width:639px){.card{padding:24px}.stage{padding-top:64px}}
+    @media (prefers-reduced-motion:reduce){
+      .morph,.card,.back,.tagline,footer{transition:none}
     }
   </style>
 </head>
 <body>
   <a href="/" class="back">← Volver al inicio</a>
 
-  <div class="top-logo">
-    <img src="/assets/smartq-mark.png" alt="SmartQ">
-  </div>
+  <main class="stage">
+    <p class="tagline">Seleccioná la plataforma a la que querés acceder</p>
 
-  <p class="tagline">Seleccioná la plataforma a la que querés acceder</p>
-
-  <div class="cards">
-    <a href="https://control.smartq.com.ar" class="card">
-      <div class="card-logo-wrap" style="background:#EFF8FF">
-        <img src="/assets/smartq-mark.png" alt="SmartQ Control">
-      </div>
-      <div>
+    <div class="cards">
+      <a href="https://control.smartq.com.ar/login" id="card-control" class="card">
+        <div class="tile"><img src="/assets/smartq-mark.png" alt=""></div>
         <h2>SmartQ Control</h2>
-        <p style="margin-top:8px">Gestión de dispositivos, pagos QR, monitoreo y reportes para máquinas autoservicio.</p>
-      </div>
-      <div class="card-btn btn-blue">Acceder →</div>
-    </a>
+        <div class="card-rest">
+          <p>Gestión de dispositivos, pagos QR, monitoreo y reportes para máquinas autoservicio.</p>
+          <div class="card-btn">Acceder →</div>
+        </div>
+      </a>
 
-    <a href="https://coffeecontrol.smartq.com.ar" class="card">
-      <div class="coffee-logo">
-        <span>☕</span>
-        <small>COFFEE</small>
-      </div>
-      <div>
+      <a href="https://coffeecontrol.smartq.com.ar" class="card">
+        <div class="tile coffee"><span>☕</span><small>COFFEE</small></div>
         <h2>CoffeeControl</h2>
-        <p style="margin-top:8px">Plataforma especializada para gestión de máquinas de café y bebidas calientes.</p>
-      </div>
-      <div class="card-btn btn-coffee">Acceder →</div>
-    </a>
-  </div>
+        <div class="card-rest">
+          <p>Plataforma especializada para gestión de máquinas de café y bebidas calientes.</p>
+          <div class="card-btn btn-coffee">Acceder →</div>
+        </div>
+      </a>
+    </div>
+  </main>
 
-  <footer>© 2026 SmartQ · <a href="/">smartq.com.ar</a></footer>
+  <footer>© 2022 SmartQ Argentina · Vending más inteligente</footer>
+
+  <script>
+    (function () {
+      // En la PC de desarrollo el login corre en otro puerto
+      var local = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+      var CONTROL_URL = local ? 'http://localhost:3002/login' : 'https://control.smartq.com.ar/login';
+      // Medidas de la tarjeta del login (iguales a auth-shell.tsx): ancho maximo, alto minimo (desde 640 px de ancho), pie de 42 px
+      var LOGIN_W = 380, LOGIN_H = 400, LOGIN_H_MOBILE = 384, FOOTER_H = 42, MS = 620;
+
+      var card = document.getElementById('card-control');
+      card.setAttribute('href', CONTROL_URL);
+
+      card.addEventListener('click', function (e) {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;      // abrir en otra pestaña: comportamiento normal
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        e.preventDefault();
+
+        var vw = window.innerWidth, vh = window.innerHeight;
+        var from = card.getBoundingClientRect();
+        var w = Math.min(LOGIN_W, vw - 32);
+        var h = vw >= 640 ? LOGIN_H : LOGIN_H_MOBILE;
+        var left = (vw - w) / 2;
+        var top = Math.max(16, (vh - FOOTER_H - h) / 2);
+
+        // Copia fija de la tarjeta, en el mismo lugar, que viaja hasta el lugar y tamaño de la tarjeta del login
+        var clone = card.cloneNode(true);
+        clone.removeAttribute('id');
+        clone.classList.add('morph');
+        clone.style.left = from.left + 'px';
+        clone.style.top = from.top + 'px';
+        clone.style.width = from.width + 'px';
+        clone.style.height = from.height + 'px';
+        clone.style.maxWidth = 'none';
+        document.body.appendChild(clone);
+
+        card.classList.add('chosen');
+        document.body.classList.add('leaving');
+        void clone.offsetWidth;                                                  // fija el punto de partida antes de animar
+        clone.style.left = left + 'px';
+        clone.style.top = top + 'px';
+        clone.style.width = w + 'px';
+        clone.style.height = h + 'px';
+
+        setTimeout(function () { location.href = CONTROL_URL + '?from=acceso'; }, MS);
+      });
+
+      // Si se vuelve con el boton "atras", se restaura la pagina tal como estaba
+      window.addEventListener('pageshow', function (ev) {
+        if (!ev.persisted) return;
+        document.body.classList.remove('leaving');
+        var c = document.getElementById('card-control');
+        if (c) c.classList.remove('chosen');
+        document.querySelectorAll('.morph').forEach(function (n) { n.remove(); });
+      });
+    })();
+  </script>
 </body>
 </html>
