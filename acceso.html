@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
   <style>
-    /* Mismo fondo, tarjeta, Q y titulo que el login de SmartQ Control (control.smartq.com.ar/login): al elegir SmartQ Control la tarjeta
+    /* Mismo fondo, medidas, Q y titulo que el login de SmartQ Control (control.smartq.com.ar/login): al elegir SmartQ Control la tarjeta
        crece hasta quedar igual a la del login (380 px, alto 400 px, radio 24 px, relleno 32 px). Si se cambian esas medidas en el login
        (FrontEnd/components/auth/auth-shell.tsx del repo SmartQ-Control), hay que cambiarlas aca tambien (constantes del script). */
     *{box-sizing:border-box;margin:0;padding:0}
@@ -41,16 +41,16 @@
     }
     .card{
       flex:1;min-width:280px;max-width:340px;
-      background:#0f172a;border:1px solid #1e293b;border-radius:24px;
+      background:#fff;border:1px solid transparent;border-radius:24px;
       padding:32px;
-      text-decoration:none;color:#f1f5f9;text-align:center;
+      text-decoration:none;color:#2D3340;text-align:center;
       display:flex;flex-direction:column;align-items:center;
-      box-shadow:0 25px 50px -12px rgba(0,0,0,.5);
-      transition:transform .25s,border-color .25s,opacity .3s;
+      box-shadow:0 8px 32px rgba(0,0,0,.15);
+      transition:transform .25s,box-shadow .25s,opacity .3s;
     }
-    .card:hover{transform:translateY(-4px);border-color:#334155}
+    .card:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(0,0,0,.25)}
     .tile{
-      width:64px;height:64px;border-radius:16px;background:#fff;padding:8px;
+      width:64px;height:64px;border-radius:16px;background:#EFF8FF;padding:8px;
       display:flex;align-items:center;justify-content:center;flex:none;
     }
     .tile img{width:100%;height:100%;object-fit:contain}
@@ -59,7 +59,7 @@
     .tile.coffee small{font-size:8px;color:rgba(255,255,255,.75);font-weight:600;letter-spacing:1px}
     .card h2{
       font-family:'Poppins',sans-serif;font-weight:700;
-      font-size:24px;letter-spacing:-.025em;color:#fff;
+      font-size:24px;letter-spacing:-.025em;color:#2D3340;
       margin-top:16px;line-height:32px;
     }
     .card-rest{
@@ -67,7 +67,7 @@
       display:flex;flex-direction:column;align-items:center;gap:24px;flex:1;
       transition:opacity .2s;
     }
-    .card p{font-size:13px;color:#94a3b8;line-height:1.6}
+    .card p{font-size:13px;color:#6B7280;line-height:1.6}
     .card-btn{
       width:100%;height:40px;border-radius:12px;margin-top:auto;
       display:flex;align-items:center;justify-content:center;
@@ -89,10 +89,17 @@
     body.leaving .card.chosen{visibility:hidden}
     .morph{
       position:fixed;z-index:50;margin:0;
-      transition:left .6s cubic-bezier(.22,1,.36,1),top .6s cubic-bezier(.22,1,.36,1),width .6s cubic-bezier(.22,1,.36,1),height .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1);
+      transition-duration:.6s;transition-timing-function:cubic-bezier(.22,1,.36,1);
       transform:none !important;pointer-events:none;
     }
     .morph .card-rest{opacity:0}
+    /* La tarjeta blanca se oscurece mientras viaja: termina igual a la del login (fondo #0f172a, borde #1e293b, titulo blanco, Q sobre blanco) */
+    .morph{transition-property:left,top,width,height,transform,background-color,border-color,box-shadow}
+    .morph h2{transition:color .6s ease}
+    .morph .tile{transition:background-color .6s ease}
+    .morph.morph-dark{background:#0f172a;border-color:#1e293b;box-shadow:0 25px 50px -12px rgba(0,0,0,.5)}
+    .morph.morph-dark h2{color:#fff}
+    .morph.morph-dark .tile:not(.coffee){background:#fff}
     @media(max-width:620px){
       .cards{flex-direction:column;align-items:center}
       .card{max-width:100%}
@@ -169,6 +176,7 @@
         card.classList.add('chosen');
         document.body.classList.add('leaving');
         void clone.offsetWidth;                                                  // fija el punto de partida antes de animar
+        clone.classList.add('morph-dark');
         clone.style.left = left + 'px';
         clone.style.top = top + 'px';
         clone.style.width = w + 'px';
