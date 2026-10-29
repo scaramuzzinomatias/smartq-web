@@ -1,3 +1,4 @@
+require ("dotenv").config();
 const path = require("node:path");
 const express = require("express");
 const nodemailer = require("nodemailer");
@@ -115,6 +116,9 @@ app.post("/api/contact", async (req, res) => {
     console.error("SmartQ: error enviando email.", error);
     return res.status(500).json({ ok: false, message: "No se pudo enviar la consulta." });
   }
+});
+app.get("/acceso", (req, res) => {
+  res.sendFile(path.join(publicDir, "acceso.html"));
 });
 
 app.get("*", (req, res) => {
