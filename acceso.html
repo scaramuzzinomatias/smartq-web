@@ -100,6 +100,11 @@
     .morph.morph-dark{background:#0f172a;border-color:#1e293b;box-shadow:0 25px 50px -12px rgba(0,0,0,.5)}
     .morph.morph-dark h2{color:#fff}
     .morph.morph-dark .tile:not(.coffee){background:#fff}
+    /* CoffeeControl conserva los colores de su login original (coffeecontrol-admin.html, #loginScreen): tarjeta #1e1e1c, fondo #111110, texto #e8e7e1 */
+    .morph.morph-dark[data-theme=coffee]{background:#1e1e1c;border-color:rgba(255,255,240,.10)}
+    .morph.morph-dark[data-theme=coffee] h2{color:#e8e7e1}
+    body::before{content:'';position:fixed;inset:0;z-index:40;pointer-events:none;background:#111110;opacity:0;transition:opacity .6s ease}
+    body.to-coffee::before{opacity:1}
     @media(max-width:620px){
       .cards{flex-direction:column;align-items:center}
       .card{max-width:100%}
@@ -126,7 +131,7 @@
         </div>
       </a>
 
-      <a href="https://coffeecontrol.smartq.com.ar" class="card">
+      <a href="https://coffeecontrol.smartq.com.ar/" id="card-coffee" data-theme="coffee" class="card">
         <div class="tile coffee"><span>☕</span><small>COFFEE</small></div>
         <h2>CoffeeControl</h2>
         <div class="card-rest">
@@ -141,56 +146,74 @@
 
   <script>
     (function () {
-      // En la PC de desarrollo el login corre en otro puerto
+      // En la PC de desarrollo cada login corre en otro puerto
       var local = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-      var CONTROL_URL = local ? 'http://localhost:3002/login' : 'https://control.smartq.com.ar/login';
-      // Medidas de la tarjeta del login (iguales a auth-shell.tsx): ancho maximo, alto minimo (desde 640 px de ancho), pie de 42 px
-      var LOGIN_W = 380, LOGIN_H = 400, LOGIN_H_MOBILE = 384, FOOTER_H = 42, MS = 620;
+      var MS = 620;
 
-      var card = document.getElementById('card-control');
-      card.setAttribute('href', CONTROL_URL);
+      // Medidas de la tarjeta del login de cada plataforma. Tienen que ser IGUALES a las del login (si no, la tarjeta "salta" al llegar):
+      //  - SmartQ Control: FrontEnd/components/auth/auth-shell.tsx del repo SmartQ-Control (380 x 400, centrada sobre un pie de 42 px; en celular 384 de alto).
+      //  - CoffeeControl: .login-box de coffeecontrol-admin.html del repo CoffeeControl (380 x 575, sin pie; en celular ocupa el ancho menos 14 px por lado).
+      var APPS = {
+        'card-control': {
+          url: local ? 'http://localhost:3002/login' : 'https://control.smartq.com.ar/login',
+          target: function (vw, vh) {
+            var w = Math.min(380, vw - 32), h = vw >= 640 ? 400 : 384;
+            return { left: (vw - w) / 2, top: Math.max(16, (vh - 42 - h) / 2), w: w, h: h };
+          }
+        },
+        'card-coffee': {
+          url: local ? 'http://localhost:3005/' : 'https://coffeecontrol.smartq.com.ar/',
+          target: function (vw, vh) {
+            if (vw <= 700) return { left: 14, top: 14, w: vw - 28, h: 559 };
+            return { left: (vw - 380) / 2, top: Math.max(24, (vh - 575) / 2), w: 380, h: 575 };
+          }
+        }
+      };
 
-      card.addEventListener('click', function (e) {
-        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;      // abrir en otra pestaña: comportamiento normal
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-        e.preventDefault();
+      function setup(id) {
+        var cfg = APPS[id], card = document.getElementById(id);
+        card.setAttribute('href', cfg.url);
 
-        var vw = window.innerWidth, vh = window.innerHeight;
-        var from = card.getBoundingClientRect();
-        var w = Math.min(LOGIN_W, vw - 32);
-        var h = vw >= 640 ? LOGIN_H : LOGIN_H_MOBILE;
-        var left = (vw - w) / 2;
-        var top = Math.max(16, (vh - FOOTER_H - h) / 2);
+        card.addEventListener('click', function (e) {
+          if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;      // abrir en otra pestaña: comportamiento normal
+          if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+          e.preventDefault();
 
-        // Copia fija de la tarjeta, en el mismo lugar, que viaja hasta el lugar y tamaño de la tarjeta del login
-        var clone = card.cloneNode(true);
-        clone.removeAttribute('id');
-        clone.classList.add('morph');
-        clone.style.left = from.left + 'px';
-        clone.style.top = from.top + 'px';
-        clone.style.width = from.width + 'px';
-        clone.style.height = from.height + 'px';
-        clone.style.maxWidth = 'none';
-        document.body.appendChild(clone);
+          var from = card.getBoundingClientRect();
+          var t = cfg.target(window.innerWidth, window.innerHeight);
+          var go = cfg.url + '?from=acceso';
 
-        card.classList.add('chosen');
-        document.body.classList.add('leaving');
-        void clone.offsetWidth;                                                  // fija el punto de partida antes de animar
-        clone.classList.add('morph-dark');
-        clone.style.left = left + 'px';
-        clone.style.top = top + 'px';
-        clone.style.width = w + 'px';
-        clone.style.height = h + 'px';
+          // Copia fija de la tarjeta, en el mismo lugar, que viaja hasta el lugar y tamaño de la tarjeta del login
+          var clone = card.cloneNode(true);
+          clone.removeAttribute('id');
+          clone.classList.add('morph');
+          clone.style.left = from.left + 'px';
+          clone.style.top = from.top + 'px';
+          clone.style.width = from.width + 'px';
+          clone.style.height = from.height + 'px';
+          clone.style.maxWidth = 'none';
+          document.body.appendChild(clone);
 
-        setTimeout(function () { location.href = CONTROL_URL + '?from=acceso'; }, MS);
-      });
+          card.classList.add('chosen');
+          document.body.classList.add('leaving');
+          if (card.getAttribute('data-theme') === 'coffee') document.body.classList.add('to-coffee');   // el fondo pasa al del login de CoffeeControl
+          void clone.offsetWidth;                                                  // fija el punto de partida antes de animar
+          clone.classList.add('morph-dark');
+          clone.style.left = t.left + 'px';
+          clone.style.top = t.top + 'px';
+          clone.style.width = t.w + 'px';
+          clone.style.height = t.h + 'px';
+
+          setTimeout(function () { location.href = go; }, MS);
+        });
+      }
+      Object.keys(APPS).forEach(setup);
 
       // Si se vuelve con el boton "atras", se restaura la pagina tal como estaba
       window.addEventListener('pageshow', function (ev) {
         if (!ev.persisted) return;
-        document.body.classList.remove('leaving');
-        var c = document.getElementById('card-control');
-        if (c) c.classList.remove('chosen');
+        document.body.classList.remove('leaving', 'to-coffee');
+        document.querySelectorAll('.card.chosen').forEach(function (c) { c.classList.remove('chosen'); });
         document.querySelectorAll('.morph').forEach(function (n) { n.remove(); });
       });
     })();
