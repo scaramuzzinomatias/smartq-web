@@ -100,6 +100,11 @@
     .morph.morph-dark{background:#0f172a;border-color:#1e293b;box-shadow:0 25px 50px -12px rgba(0,0,0,.5)}
     .morph.morph-dark h2{color:#fff}
     .morph.morph-dark .tile:not(.coffee){background:#fff}
+    /* CoffeeControl conserva los colores de su login original (coffeecontrol-admin.html, #loginScreen): tarjeta #1e1e1c, fondo #111110, texto #e8e7e1 */
+    .morph.morph-dark[data-theme=coffee]{background:#1e1e1c;border-color:rgba(255,255,240,.10)}
+    .morph.morph-dark[data-theme=coffee] h2{color:#e8e7e1}
+    body::before{content:'';position:fixed;inset:0;z-index:40;pointer-events:none;background:#111110;opacity:0;transition:opacity .6s ease}
+    body.to-coffee::before{opacity:1}
     @media(max-width:620px){
       .cards{flex-direction:column;align-items:center}
       .card{max-width:100%}
@@ -126,7 +131,7 @@
         </div>
       </a>
 
-      <a href="https://coffeecontrol.smartq.com.ar/" id="card-coffee" class="card">
+      <a href="https://coffeecontrol.smartq.com.ar/" id="card-coffee" data-theme="coffee" class="card">
         <div class="tile coffee"><span>☕</span><small>COFFEE</small></div>
         <h2>CoffeeControl</h2>
         <div class="card-rest">
@@ -191,6 +196,7 @@
 
           card.classList.add('chosen');
           document.body.classList.add('leaving');
+          if (card.getAttribute('data-theme') === 'coffee') document.body.classList.add('to-coffee');   // el fondo pasa al del login de CoffeeControl
           void clone.offsetWidth;                                                  // fija el punto de partida antes de animar
           clone.classList.add('morph-dark');
           clone.style.left = t.left + 'px';
@@ -206,7 +212,7 @@
       // Si se vuelve con el boton "atras", se restaura la pagina tal como estaba
       window.addEventListener('pageshow', function (ev) {
         if (!ev.persisted) return;
-        document.body.classList.remove('leaving');
+        document.body.classList.remove('leaving', 'to-coffee');
         document.querySelectorAll('.card.chosen').forEach(function (c) { c.classList.remove('chosen'); });
         document.querySelectorAll('.morph').forEach(function (n) { n.remove(); });
       });
